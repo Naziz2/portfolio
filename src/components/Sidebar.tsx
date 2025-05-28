@@ -15,7 +15,6 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPath, onNavigate }) => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Dynamically get the icon component
   const getIcon = (iconName: string) => {
     const IconComponent = Icons[iconName as keyof typeof Icons] as React.ComponentType<
       React.ComponentProps<Icon>
@@ -25,7 +24,6 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPath, onNavigate }) => {
 
   return (
     <>
-      {/* Mobile Menu Button */}
       <button 
         onClick={toggleMobileMenu}
         className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded-md"
@@ -37,11 +35,15 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPath, onNavigate }) => {
         }
       </button>
       
-      {/* Sidebar for desktop */}
       <div className="hidden lg:flex fixed left-0 top-0 h-full w-64 bg-gray-900 text-white flex-col z-40">
         <div className="p-6 border-b border-gray-800">
-          <h1 className="text-xl font-bold">Nahedh Mohamed Aziz</h1>
-          <p className="text-gray-400 mt-1">Web & Software Developer</p>
+          <div className="flex items-center space-x-3">
+            <img src="/whale-logo.png" alt="Logo" className="w-12 h-12" />
+            <div>
+              <h1 className="text-xl font-bold">Nahedh Mohamed Aziz</h1>
+              <p className="text-gray-400 mt-1">Web & Software Developer</p>
+            </div>
+          </div>
         </div>
         
         <nav className="flex-1 py-6">
@@ -76,7 +78,6 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPath, onNavigate }) => {
         </div>
       </div>
       
-      {/* Mobile sidebar (slide in) */}
       <div 
         className={`lg:hidden fixed inset-0 bg-gray-900 bg-opacity-80 z-30 transition-opacity duration-300 ${
           isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
@@ -90,8 +91,13 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPath, onNavigate }) => {
         }`}
       >
         <div className="p-6 border-b border-gray-800">
-          <h1 className="text-xl font-bold">Nahedh Mohamed Aziz</h1>
-          <p className="text-gray-400 mt-1">Web & Software Developer</p>
+          <div className="flex items-center space-x-3">
+            <img src="/whale-logo.png" alt="Logo" className="w-12 h-12" />
+            <div>
+              <h1 className="text-xl font-bold">Nahedh Mohamed Aziz</h1>
+              <p className="text-gray-400 mt-1">Web & Software Developer</p>
+            </div>
+          </div>
         </div>
         
         <nav className="py-6">
