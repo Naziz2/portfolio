@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply bg-gray-900 text-white;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-indigo-600;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+  font-size: 14px;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInFromBottom {
+  from { 
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes rotate-the-funk {
+  0% { transform: rotate(360deg); }
+  50% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+@keyframes shadow {
+  0% { transform: scale(1) translate(-20%, -10%); }
+  25% { transform: scale(0.5) translate(-20%, -10%); }
+  50% { transform: scale(1) translate(-20%, -10%); }
+  75% { transform: scale(0.5) translate(-20%, -10%); }
+  100% { transform: scale(1) translate(-20%, -10%); }
+}
+
+@keyframes flyPaperPlaneSuccess {
+  0% {
+    transform: translate(0, 0) rotate(0);
+    opacity: 1;
+  }
+  25% {
+    transform: translate(100px, -100px) rotate(360deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(0, -150px) rotate(720deg);
+    opacity: 1;
+  }
+  75% {
+    transform: translate(-100px, -100px) rotate(1080deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) rotate(1440deg);
+    opacity: 0;
+  }
+}
+
+@keyframes flyPaperPlaneFail {
+  0% {
+    transform: translate(0, 0) rotate(0);
+    opacity: 1;
+  }
+  25% {
+    transform: translate(50px, -50px) rotate(45deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(100px, 0) rotate(90deg);
+    opacity: 1;
+  }
+  75% {
+    transform: translate(150px, 100px) rotate(180deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(200px, 200px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slide-in {
+  animation: slideInFromBottom 0.5s ease-out;
+}
+
+.animate-rotate {
+  animation: rotate-the-funk 2.25s forwards;
+}
+
+.animate-shadow {
+  animation: shadow 2.25s forwards;
+}
+
+.animate-fly-success {
+  animation: flyPaperPlaneSuccess 2s ease-in-out forwards;
+}
+
+.animate-fly-fail {
+  animation: flyPaperPlaneFail 1.5s ease-in-out forwards;
+}
+
+.send-button {
+  position: relative;
+  overflow: hidden;
+  transition: 1s border, 0.75s transform;
+}
+
+.send-button:hover {
+  transform: translateY(-2px);
+}
+
+.send-button .icon {
+  position: relative;
+  transform-origin: center;
+}
+
+.send-button .icon:before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: scale(1) translate(-50%, -50%);
+  z-index: -1;
+  transform-origin: center;
+}
