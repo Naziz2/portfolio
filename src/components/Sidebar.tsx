@@ -38,7 +38,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPath, onNavigate }) => {
       <div className="hidden lg:flex fixed left-0 top-0 h-full w-64 bg-gray-900 text-white flex-col z-40">
         <div className="p-6 border-b border-gray-800">
           <div className="flex items-center space-x-3">
-            <img src="/whale-logo.png" alt="Logo" className="w-12 h-12" />
+            <img src="whale-logo.png" alt="Logo" className="w-12 h-12 object-contain" />
             <div>
               <h1 className="text-xl font-bold">Nahedh Mohamed Aziz</h1>
               <p className="text-gray-400 mt-1">Web & Software Developer</p>
@@ -92,7 +92,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPath, onNavigate }) => {
       >
         <div className="p-6 border-b border-gray-800">
           <div className="flex items-center space-x-3">
-            <img src="/whale-logo.png" alt="Logo" className="w-12 h-12" />
+            <img src="whale-logo.png" alt="Logo" className="w-12 h-12 object-contain" />
             <div>
               <h1 className="text-xl font-bold">Nahedh Mohamed Aziz</h1>
               <p className="text-gray-400 mt-1">Web & Software Developer</p>
