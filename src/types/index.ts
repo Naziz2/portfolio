@@ -6,6 +6,7 @@ export interface Project {
   technologies: string[];
   link?: string;
   githubLink?: string;
+  livePreview?: boolean;
 }
 
 export interface NavItem {
