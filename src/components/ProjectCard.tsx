@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ExternalLink, Github, Eye, EyeOff } from 'lucide-react';
+import { ExternalLink, Github, Eye, EyeOff, Image } from 'lucide-react';
 import { Project } from '../types';
 
 interface ProjectCardProps {
@@ -9,7 +9,8 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, delay = 0 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [showPreview, setShowPreview] = useState(false);
+  const [showPreview, setShowPreview] = useState(true); // Default to showing preview
+  const [previewLoaded, setPreviewLoaded] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,9 +39,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, delay = 0 }) => {
   }, [delay]);
 
   const togglePreview = () => {
-    if (project.livePreview && project.link) {
-      setShowPreview(!showPreview);
-    }
+    setShowPreview(!showPreview);
+  };
+
+  const handleIframeLoad = () => {
+    setPreviewLoaded(true);
   };
 
   return (
@@ -50,14 +53,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, delay = 0 }) => {
         isVisible ? 'opacity-100 transform-none' : 'opacity-0 translate-y-8'
       }`}
     >
-      <div className="relative h-48 overflow-hidden">
-        {showPreview && project.link ? (
-          <iframe
-            src={project.link}
-            className="w-full h-full border-0 scale-50 origin-top-left"
-            style={{ width: '200%', height: '200%' }}
-            title={`${project.title} preview`}
-          />
+      <div className="relative h-48 overflow-hidden bg-gray-900">
+        {showPreview && project.link && project.livePreview ? (
+          <>
+            {!previewLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500"></div>
+              </div>
+            )}
+            <iframe
+              src={project.link}
+              className={`w-full h-full border-0 scale-50 origin-top-left transition-opacity duration-300 ${
+                previewLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+              style={{ width: '200%', height: '200%' }}
+              title={`${project.title} preview`}
+              onLoad={handleIframeLoad}
+              sandbox="allow-scripts allow-same-origin"
+            />
+          </>
         ) : (
           <img 
             src={project.imageUrl} 
@@ -68,14 +82,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, delay = 0 }) => {
         
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent opacity-75" />
         
+        {/* Toggle button - only show if project has live preview capability */}
         {project.livePreview && project.link && (
           <button
             onClick={togglePreview}
-            className="absolute top-3 right-3 p-2 bg-gray-900/80 text-white rounded-full hover:bg-indigo-600 transition-colors duration-200"
-            title={showPreview ? 'Hide preview' : 'Show live preview'}
+            className="absolute top-3 right-3 p-2 bg-gray-900/80 text-white rounded-full hover:bg-indigo-600 transition-colors duration-200 z-10"
+            title={showPreview ? 'Show image' : 'Show live preview'}
           >
-            {showPreview ? <EyeOff size={16} /> : <Eye size={16} />}
+            {showPreview ? <Image size={16} /> : <Eye size={16} />}
           </button>
+        )}
+
+        {/* Live indicator */}
+        {project.livePreview && showPreview && (
+          <div className="absolute top-3 left-3 flex items-center bg-gray-900/80 rounded-full px-2 py-1 z-10">
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></div>
+            <span className="text-xs text-green-400 font-medium">Live</span>
+          </div>
         )}
       </div>
       
